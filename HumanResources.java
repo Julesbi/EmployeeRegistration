@@ -1,3 +1,4 @@
+
 public class HumanResources extends Department {
     public HumanResources() {
         super();
