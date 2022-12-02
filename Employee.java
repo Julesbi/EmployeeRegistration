@@ -1,50 +1,32 @@
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
-/**
- * @author Sebastian Dakey
- *
- */
-public abstract class Employee 
-{
-	// instance variables of Employee class
-	private final int persionAge = 60;
+// import java.util.ArrayList;
+// import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+// import java.util.Set;
+
+public class Employee {
+    private final int pensionAge = 65;
     private String employeeID;
     private String firstName;
-    private String lastName; 
+    private String lastName;
     private Gender empGender;
     private String contactNumber;
     private String address;
     private Level empLevel;
     private LocalDate dateStarted;
     private LocalDate dob;
-    private String position;
     private EducationLevel empEducationLevel;
     private double salary;
     private MaritalStatus empMaritalStatus;
+    private String empDepartment;
+    private String empPosition;
 
-
-    public Employee(String employeeID, String firstName, String lastName, Gender empGender, String constactNumber, String address,
-    Level empLevel, LocalDate dateStarted, LocalDate dob, String position, EducationLevel empEducationLevel, double salary, MaritalStatus empMaritalStatus) 
-    {
-        this.setEmployeeID(employeeID);
-        this.setFirstName(firstName);
-        this.setLastName(lastName);
-        this.setEmpGender(empGender);
-        this.setContactNumber(constactNumber);
-        this.setAddress(address);
-        this.setEmpLevel(empLevel);
-        this.setDateStarted(dateStarted);
-        this.setDob(dob);
-        this.setPosition(position);
-        this.setEmpEducationLevel(empEducationLevel);
-        this.setSalary(salary);
-        this.setEmpMaritalStatus(empMaritalStatus);
-    }
-
-    public Employee()
-    {
-        this.setEmployeeID("EMP0000");
+    // CONSTRUCTORS
+    public Employee() {
+        this.setEmployeeID("00");
         this.setFirstName("Mark");
         this.setLastName("Cuban");
         this.setEmpGender(Gender.MALE);
@@ -53,254 +35,245 @@ public abstract class Employee
         this.setEmpLevel(Level.MANAGER);
         this.setDateStarted(LocalDate.of(2020, Month.MAY, 19));
         this.setDob(LocalDate.of(1980, 4, 12));
-        this.setPosition("Senior Finance Officer");
         this.setEmpEducationLevel(EducationLevel.MASTERS);
         this.setSalary(5000.00);
         this.setEmpMaritalStatus(MaritalStatus.SINGLE);
+        this.setEmpDepartment("IT Department");
+        this.setEmpPosition("Software Developer");
     }
-    
+
+    public Employee(String employeeID, String firstName, String lastName, Gender empGender, String contactNumber,
+            String address, Level empLevel, LocalDate dateStarted, LocalDate dob, String position,
+            EducationLevel empEducationLevel, double salary, MaritalStatus empMaritalStatus, String empDepartment,
+            String empPosition) {
+        this.employeeID = employeeID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.empGender = empGender;
+        this.contactNumber = contactNumber;
+        this.address = address;
+        this.empLevel = empLevel;
+        this.dateStarted = dateStarted;
+        this.dob = dob;
+        this.empEducationLevel = empEducationLevel;
+        this.salary = salary;
+        this.empMaritalStatus = empMaritalStatus;
+        this.empDepartment = empDepartment;
+    }
+
+    // GETTERS AND SETTERS
+    public int getPensionAge() {
+        return this.pensionAge;
+    }
+
+    public String getEmployeeID() {
+        return this.employeeID;
+    }
+
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Gender getEmpGender() {
+        return this.empGender;
+    }
+
+    public void setEmpGender(Gender empGender) {
+        this.empGender = empGender;
+    }
+
+    public String getContactNumber() {
+        return this.contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Level getEmpLevel() {
+        return this.empLevel;
+    }
+
+    public void setEmpLevel(Level empLevel) {
+        this.empLevel = empLevel;
+    }
+
+    public LocalDate getDateStarted() {
+        return this.dateStarted;
+    }
+
+    public void setDateStarted(LocalDate dateStarted) {
+        this.dateStarted = dateStarted;
+    }
+
+    public LocalDate getDob() {
+        return this.dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public EducationLevel getEmpEducationLevel() {
+        return this.empEducationLevel;
+    }
+
+    public void setEmpEducationLevel(EducationLevel empEducationLevel) {
+        this.empEducationLevel = empEducationLevel;
+    }
+
+    public double getSalary() {
+        return this.salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public MaritalStatus getEmpMaritalStatus() {
+        return this.empMaritalStatus;
+    }
+
+    public void setEmpMaritalStatus(MaritalStatus empMaritalStatus) {
+        this.empMaritalStatus = empMaritalStatus;
+    }
+
+    // getter and setter for department
+    public String getEmpDepartment() {
+        return this.empDepartment;
+    }
+
+    public void setEmpDepartment(String empDepartment) {
+        this.empDepartment = empDepartment;
+    }
+
+    // getter and setter for position
+    public String getEmpPosition() {
+        return this.empPosition;
+    }
+
+    public void setEmpPosition(String empPosition) {
+        this.empPosition = empPosition;
+    }
+
+    // METHODS
     /**
-	 * @return the number years worked in the company
-	 */
-    public int yearsInCompany()
-    {
-    	Period years = Period.between(LocalDate.now(),this.dateStarted);
-        return years.getYears(); 
+     * @return the number years worked in the company
+     */
+    public int yearsInCompany() {
+        Period years = Period.between(LocalDate.now(), this.dateStarted);
+        return years.getYears();
     }
-    
+
     /**
-	 * @return the age of the employee
-	 */
-    public int calculateAge()
-    {
-    	Period years = Period.between(LocalDate.now(),this.dob);
-    	return years.getYears();
+     * @return the age of the employee
+     */
+    public int calculateAge() {
+        Period years = Period.between(LocalDate.now(), this.dob);
+        return years.getYears();
     }
+
     /**
-	 * @return the age remaining for an employee to go on persion
-	 */
-    public int yearsToPension()
-    {
-    	return this.persionAge - this.calculateAge();
+     * @return the age remaining for an employee to go on persion
+     */
+    public int yearsToPension() {
+        return this.pensionAge - this.calculateAge();
     }
-	/**
-	 * @return the employeeID
-	 */
-	public String getEmployeeID() 
-	{
-		return employeeID;
-	}
 
-	/**
-	 * @param employeeID the employeeID to set
-	 */
-	public void setEmployeeID(String employeeID) 
-	{
-		this.employeeID = employeeID;
-	}
+    @Override
+    public String toString() {
+        return "{" +
+                " pensionAge='" + getPensionAge() + "'" +
+                ", employeeID='" + getEmployeeID() + "'" +
+                ", firstName='" + getFirstName() + "'" +
+                ", lastName='" + getLastName() + "'" +
+                ", empGender='" + getEmpGender() + "'" +
+                ", contactNumber='" + getContactNumber() + "'" +
+                ", address='" + getAddress() + "'" +
+                ", empLevel='" + getEmpLevel() + "'" +
+                ", dateStarted='" + getDateStarted() + "'" +
+                ", dob='" + getDob() + "'" +
+                ", empEducationLevel='" + getEmpEducationLevel() + "'" +
+                ", salary='" + getSalary() + "'" +
+                ", empMaritalStatus='" + getEmpMaritalStatus() + "'" +
+                ", departments='" + getEmpDepartment() + "'" +
+                ", positions='" + getEmpPosition() + "'" +
+                "}";
+    }
 
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
+    // create gender of enum type
+    enum Gender {
+        MALE,
+        FEMALE
+    }
 
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    // create level of enum type
+    enum Level {
+        CSUITE,
+        DIRECTOR,
+        MANAGER
+    }
 
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
+    // create education level of enum type
+    enum EducationLevel {
+        HIGHSCHOOL,
+        BACHELORS,
+        MASTERS,
+        PHD
+    }
 
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    // create marital status of enum type
+    enum MaritalStatus {
+        SINGLE,
+        MARRIED,
+        DIVORCED
+    }
 
-	/**
-	 * @return the empGender
-	 */
-	public Gender getEmpGender() {
-		return empGender;
-	}
+    // create hashmap for departments
+    public static Map<String, String> departments = new LinkedHashMap<String, String>();
+    static {
+        departments.put("1", "Human Resources");
+        departments.put("2", "Finance");
+        departments.put("3", "Sales");
+        departments.put("4", "Marketing");
+        departments.put("5", "IT");
+        departments.put("6", "Operations");
+    }
 
-	/**
-	 * @param empGender the empGender to set
-	 */
-	public void setEmpGender(Gender empGender) {
-		this.empGender = empGender;
-	}
+    // create hashmap for positions
+    public static Map<String, String> positions = new LinkedHashMap<String, String>();
 
-	/**
-	 * @return the contactNumber
-	 */
-	public String getContactNumber() {
-		return contactNumber;
-	}
-
-	/**
-	 * @param contactNumber the contactNumber to set
-	 */
-	public void setContactNumber(String contactNumber) {
-		this.contactNumber = contactNumber;
-	}
-
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	/**
-	 * @return the empLevel
-	 */
-	public Level getEmpLevel() {
-		return empLevel;
-	}
-
-	/**
-	 * @param empLevel the empLevel to set
-	 */
-	public void setEmpLevel(Level empLevel) {
-		this.empLevel = empLevel;
-	}
-
-	/**
-	 * @return the dateStarted
-	 */
-	public LocalDate getDateStarted() {
-		return dateStarted;
-	}
-
-	/**
-	 * @param dateStarted the dateStarted to set
-	 */
-	public void setDateStarted(LocalDate dateStarted) {
-		this.dateStarted = dateStarted;
-	}
-
-	/**
-	 * @return the position
-	 */
-	public String getPosition() {
-		return position;
-	}
-
-	/**
-	 * @param position the position to set
-	 */
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-	/**
-	 * @return the empEducationLevel
-	 */
-	public EducationLevel getEmpEducationLevel() {
-		return empEducationLevel;
-	}
-
-	/**
-	 * @param empEducationLevel the empEducationLevel to set
-	 */
-	public void setEmpEducationLevel(EducationLevel empEducationLevel) {
-		this.empEducationLevel = empEducationLevel;
-	}
-
-	/**
-	 * @return the salary
-	 */
-	public double getSalary() {
-		return salary;
-	}
-
-	/**
-	 * @param salary the salary to set
-	 */
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
-
-	/**
-	 * @return the empMaritalStatus
-	 */
-	public MaritalStatus getEmpMaritalStatus() {
-		return empMaritalStatus;
-	}
-
-	/**
-	 * @param empMaritalStatus the empMaritalStatus to set
-	 */
-	public void setEmpMaritalStatus(MaritalStatus empMaritalStatus) {
-		this.empMaritalStatus = empMaritalStatus;
-	}
-
-	/**
-	 * @return the dob
-	 */
-	public LocalDate getDob() {
-		return dob;
-	}
-
-	/**
-	 * @param dob the dob to set
-	 */
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
-	}
-
-	/**
-	 * @return the persionAge
-	 */
-	public int getPersionAge() {
-		return persionAge;
-	}
-	
-    
-}
-
-//create gender of enum type 
-enum Gender {
-  MALE,
-  FEMALE
-}
-
-//create level of enum type
-enum Level {
-  CSUITE,
-  DIRECTOR,
-  MANAGER
-}
-
-//create education level of enum type
-enum EducationLevel {
-  HIGHSCHOOL,
-  BACHELORS,
-  MASTERS,
-  PHD
-}
-
-//create marital status of enum type
-enum MaritalStatus {
-  SINGLE,
-  MARRIED,
-  DIVORCED
+    static {
+        positions.put("1", "Manager");
+        positions.put("2", "Supervisor");
+        positions.put("3", "Clerk");
+        positions.put("4", "Sales Representative");
+        positions.put("5", "Marketing Representative");
+        positions.put("6", "IT Specialist");
+        positions.put("7", "Operations Manager");
+    }
 }

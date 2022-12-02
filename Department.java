@@ -1,4 +1,10 @@
-
+/*
+ * Department.java
+ * 
+ * Code for the Department class: abstract class
+ *
+ * Author: Niyomwungeri Parmenide ISHIMWE
+ */
 public abstract class Department {
 
 	private String deptID;
@@ -15,35 +21,35 @@ public abstract class Department {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-	public String getdeptID() {
+	public String getDeptID() {
 		return deptID;
 	}
 
-	public void setdeptID(String deptID) {
+	public void setDeptID(String deptID) {
 		this.deptID = deptID;
 	}
 
-	public String getdeptName() {
+	public String getDeptName() {
 		return deptName;
 	}
 
-	public void setdeptName(String deptName) {
+	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
 
-	public Employee getdeptHead() {
+	public Employee getDeptHead() {
 		return deptHead;
 	}
 
-	public void setdeptHead(Employee deptHead) {
+	public void setDeptHead(Employee deptHead) {
 		this.deptHead = deptHead;
 	}
 
-	public int getnumberOfEmployees() {
+	public int getNumberOfEmployees() {
 		return numberOfEmployees;
 	}
 
-	public void setnumberOfEmployees(int numberOfEmployees) {
+	public void setNumberOfEmployees(int numberOfEmployees) {
 		this.numberOfEmployees = numberOfEmployees;
 	}
 
