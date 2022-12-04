@@ -4,7 +4,7 @@ public class TestEmployeeDatabase {
 
 	public static void main(String[] args) {
 		RegistrationForm form = new RegistrationForm();
-		// EmployeeDatabase db = new EmployeeDatabase();
+		EmployeeDatabase db = new EmployeeDatabase();
 
 		// Employee emp1 = new Employee("00", "Yves", "Byiringiro", 
 		// 		Employee.Gender.MALE, "0788888888", "Kigali", 
@@ -18,7 +18,7 @@ public class TestEmployeeDatabase {
 		// 	"Employee Number: " + db.getEmployee("0").getContactNumber());
 
 		// // Display linkedHashMap
-		// System.out.println("\nALL USERS\n" + db.getEmployeeNames());
+		System.out.println("\nALL USERS\n" + db.getEmployeeNames());
 	}
 
 }

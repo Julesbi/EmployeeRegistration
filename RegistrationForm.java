@@ -1,8 +1,7 @@
 import javax.swing.*;
-import javafx.scene.layout.Border;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 
 public class RegistrationForm extends JFrame implements ActionListener {
         // Bring up the employee database
@@ -29,7 +28,7 @@ public class RegistrationForm extends JFrame implements ActionListener {
         String dates[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
                         "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
 
-        String months[] = { "Jan", "feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sup", "Oct", "Nov", "Dec" };
+        String months[] = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
 
         String years[] = { "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005",
                         "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
@@ -37,11 +36,6 @@ public class RegistrationForm extends JFrame implements ActionListener {
 
         // THE CONSTRUCTOR FOR THE FORM
         public RegistrationForm() {
-
-                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setSize(1200, 600);
-                setBounds(300, 90, 1200, 600);
-                setResizable(false);
 
                 JPanel panel = new JPanel();
                 panel.setLayout(null);
@@ -164,6 +158,8 @@ public class RegistrationForm extends JFrame implements ActionListener {
                 panel.add(submittedData);
 
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setBounds(300, 90, 1200, 600);
+                setResizable(false);
                 setSize(600, 600);
                 add(panel);
                 setVisible(true);
@@ -172,10 +168,46 @@ public class RegistrationForm extends JFrame implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
                 // WHEN SUBMIT BUTTON IS CLICKED, DISPLAY THE DATA IN THE TEXT AREA
+                // if (e.getSource() == submit) {
+                // String data = "First Name : " + fNameText.getText();
+                // submittedData.setText(data);
+                // }
+
                 if (e.getSource() == submit) {
-                        String data = "First Name : " + fNameText.getText();
-                        submittedData.setText(data);
+                        Employee employee = new Employee();
+                        String id = "06";
+                        String firstName = "John";
+                        String lastName = "Doe";
+                        Employee.Gender gender = Employee.Gender.MALE;
+                        String number = "0700000000";
+                        String address = "Nairobi";
+                        Employee.EducationLevel empEducationLevel = Employee.EducationLevel.BACHELORS;
+                        Employee.MaritalStatus empMaritalStatus = Employee.MaritalStatus.MARRIED;
+                        String empDepartment = Employee.departments.get("1");
+                        Employee.Level empLevel = Employee.Level.MANAGER;
+                        LocalDate dateStarted = LocalDate.now();
+                        LocalDate dob = (LocalDate.of(2020, 05, 19));
+                        double salary = 1000000.00;
+                        String position = Employee.positions.get("7");
+
+                        LocalDate dob1 = LocalDate.of(Integer.parseInt(year.getSelectedItem().toString()),
+                                        Integer.parseInt(month.getSelectedItem().toString()),
+                                        Integer.parseInt(date.getSelectedItem().toString()));
+
+                        Employee newEmployee = new Employee(id,
+                                        fNameText.getText(),
+                                        lNameText.getText(),
+                                        male.isSelected() ? Employee.Gender.MALE : Employee.Gender.FEMALE,
+                                        number,
+                                        addressText.getText(),
+                                        empLevel,
+                                        dateStarted,
+                                        dob1,
+                                        empEducationLevel, salary, empMaritalStatus, empDepartment, position);
+
+                        db.createEmployee("05", employee);
+                        db.createEmployee("06", newEmployee);
+                        System.out.println(db.getEmployeeNames());
                 }
         }
-                
-        }
+}

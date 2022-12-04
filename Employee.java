@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.Period;
 // import java.util.ArrayList;
 // import java.util.Iterator;
@@ -33,19 +32,18 @@ public class Employee {
         this.setContactNumber("0794352134");
         this.setAddress("KG 154 Street, Kigali");
         this.setEmpLevel(Level.MANAGER);
-        this.setDateStarted(LocalDate.of(2020, Month.MAY, 19));
+        this.setDateStarted(LocalDate.of(2020, 05, 19));
         this.setDob(LocalDate.of(1980, 4, 12));
         this.setEmpEducationLevel(EducationLevel.MASTERS);
         this.setSalary(5000.00);
         this.setEmpMaritalStatus(MaritalStatus.SINGLE);
-        this.setEmpDepartment("IT Department");
-        this.setEmpPosition("Software Developer");
+        this.setEmpDepartment(departments.get("1"));
+        this.setEmpPosition(positions.get("3"));
     }
 
     public Employee(String employeeID, String firstName, String lastName, Gender empGender, String contactNumber,
-            String address, Level empLevel, LocalDate dateStarted, LocalDate dob, String position,
-            EducationLevel empEducationLevel, double salary, MaritalStatus empMaritalStatus, String empDepartment,
-            String empPosition) {
+            String address, Level empLevel, LocalDate dateStarted, LocalDate dob, EducationLevel empEducationLevel,
+            double salary, MaritalStatus empMaritalStatus, String empDepartment, String empPosition) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -226,20 +224,20 @@ public class Employee {
     }
 
     // create gender of enum type
-    enum Gender {
+    static enum Gender {
         MALE,
         FEMALE
     }
 
     // create level of enum type
-    enum Level {
+    static enum Level {
         CSUITE,
         DIRECTOR,
         MANAGER
     }
 
     // create education level of enum type
-    enum EducationLevel {
+    static enum EducationLevel {
         HIGHSCHOOL,
         BACHELORS,
         MASTERS,
@@ -247,7 +245,7 @@ public class Employee {
     }
 
     // create marital status of enum type
-    enum MaritalStatus {
+    static enum MaritalStatus {
         SINGLE,
         MARRIED,
         DIVORCED
@@ -260,7 +258,7 @@ public class Employee {
         departments.put("2", "Finance");
         departments.put("3", "Sales");
         departments.put("4", "Marketing");
-        departments.put("5", "IT");
+        departments.put("5", "Technology");
         departments.put("6", "Operations");
     }
 

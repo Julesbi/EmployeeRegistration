@@ -19,21 +19,21 @@ public class EmployeeDatabase {
 
     public void createEmployee(String i, Employee employee) {
         employees.put(i, employee);
+        System.out.println("Employee " + employee.getFirstName() + " " + employee.getLastName() + " has been created.");
     }
 
     public ArrayList<String> getEmployeeNames() {
         ArrayList<String> names = new ArrayList<>();
 
         Iterator<String> iterator = null;
-        Set<String> hasMapKeys = employees.keySet();
+        Set<String> hashMapKeys = employees.keySet();
 
-        iterator = hasMapKeys.iterator();
+        iterator = hashMapKeys.iterator();
         while (iterator.hasNext()) {
             String key = (String) iterator.next();
             names.add(employees.get(key).getFirstName());
         }
         
         return names;
-
     }
 }
