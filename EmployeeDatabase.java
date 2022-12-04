@@ -19,7 +19,30 @@ public class EmployeeDatabase {
 
     public void createEmployee(String i, Employee employee) {
         employees.put(i, employee);
-        System.out.println("Employee " + employee.getFirstName() + " " + employee.getLastName() + " has been created.");
+        System.out.println("Employee no. " +
+                employee.getEmployeeID() + ", " +
+                employee.getFirstName() + ", " +
+                employee.getLastName() + ", " +
+                employee.getEmpDepartment() + ", " +
+                employee.getEmpPosition() + ", " +
+                employee.getEmpEducationLevel() + ", " +
+                employee.getEmpGender() + ", " +
+                employee.getEmpMaritalStatus() + ", " +
+                " has been created.");
+    }
+
+    // get the the largest employee id
+    public int getLargestEmployeeId() {
+        String largestId = "0";
+        Set<String> keys = employees.keySet();
+        Iterator<String> iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            if (Integer.parseInt(key) > Integer.parseInt(largestId)) {
+                largestId = key;
+            }
+        }
+        return Integer.parseInt(largestId);
     }
 
     public ArrayList<String> getEmployeeNames() {
@@ -33,7 +56,7 @@ public class EmployeeDatabase {
             String key = (String) iterator.next();
             names.add(employees.get(key).getFirstName());
         }
-        
+
         return names;
     }
 }

@@ -57,7 +57,9 @@ public class Employee {
         this.salary = salary;
         this.empMaritalStatus = empMaritalStatus;
         this.empDepartment = empDepartment;
+        this.empPosition = empPosition;
     }
+
 
     // GETTERS AND SETTERS
     public int getPensionAge() {
@@ -238,7 +240,7 @@ public class Employee {
 
     // create education level of enum type
     static enum EducationLevel {
-        HIGHSCHOOL,
+        HIGH_SCHOOL,
         BACHELORS,
         MASTERS,
         PHD
@@ -266,8 +268,8 @@ public class Employee {
     public static Map<String, String> positions = new LinkedHashMap<String, String>();
 
     static {
-        positions.put("1", "Manager");
-        positions.put("2", "Supervisor");
+        positions.put("1", "Manager of Human Resources");
+        positions.put("2", "Supervisor of Sales");
         positions.put("3", "Clerk");
         positions.put("4", "Sales Representative");
         positions.put("5", "Marketing Representative");
