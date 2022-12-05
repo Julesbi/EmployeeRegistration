@@ -321,7 +321,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
                 if (e.getSource() == submit) {
-
+                        // get department key from departmentText
                         for (String key : Employee.departments.keySet())
                                 if (Employee.departments.get(key).equals(departmentText.getSelectedItem()))
                                         selectedDepartment = key;

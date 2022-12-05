@@ -59,4 +59,46 @@ public class EmployeeDatabase {
 
         return names;
     }
+
+    // list employee information by employee id on separate lines
+    public void listEmployeeInformation() {
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            System.out.println(employees.get(key).toString());
+        }
+    }
+
+    // list employee information by employee id on separate lines
+    public void listEmployeeInformation(String i) {
+        System.out.println(employees.get(i).toString());
+    }
+
+    // list all employees by department
+    public void listEmployeesByDepartment(String department) {
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            if (employees.get(key).getEmpDepartment().equals(department)) {
+                System.out.println(employees.get(key).toString());
+            }
+        }
+    }
+
+    // return total number of employees
+    public int getNumberOfEmployees() {
+        return employees.size();
+    }
+
+    // 
+    
+    
+    
+    
 }
