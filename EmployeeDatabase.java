@@ -9,7 +9,7 @@ import java.util.Formatter;
 
 public class EmployeeDatabase {
 
-    private final Map<String, Employee> employees;
+    private static Map<String, Employee> employees;
 
     public EmployeeDatabase() {
         employees = new LinkedHashMap<>();
@@ -91,7 +91,7 @@ public class EmployeeDatabase {
     }
 
     // return number of employees in a department
-    public int getNumberOfEmployeesInDepartment(String department) {
+    public static int getNumberOfEmployeesInDepartment(String department) {
         int count = 0;
         System.out.println("Department: " + department);
 
@@ -119,7 +119,7 @@ public class EmployeeDatabase {
     }
 
     // return total number of employees
-    public int getNumberOfEmployees() {
+    public static int getNumberOfEmployees() {
         return employees.size();
     }
 
@@ -339,7 +339,6 @@ public class EmployeeDatabase {
                 countOver50++;
             }
         }
-
         System.out.println("Age Distribution");
         System.out.println("Under 20: " + countUnder20);
         System.out.println("20 to 30: " + count20to30);
@@ -348,18 +347,38 @@ public class EmployeeDatabase {
         System.out.println("Over 50: " + countOver50);
     }
 
-    // get the firstname, lastname, position, gender and department of all employees
-    public void getEmployeeDetails() {
+
+
+    // write a function that returns an arraylist of all employees as objects
+    public static ArrayList<String> getEmployees() 
+    {
+        ArrayList<String> info = new ArrayList<String>();
+        String title = "First Name\tLast Name\tPosition\tDepartment\t\tYears in Company\tDate Started";
+        info.add(title);
         Iterator<String> iterator = null;
         Set<String> hashMapKeys = employees.keySet();
 
         iterator = hashMapKeys.iterator();
-        System.out.printf("First Name\tLast Name\tPosition\tGender\tDepartment\n");
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) 
+        {        
+            String str = "";
             String key = (String) iterator.next();
-            System.out.printf("%s\t\t%s\t\t%s\t\t%s\t%s\n", employees.get(key).getFirstName(), employees.get(key).getLastName(), employees.get(key).getEmpPosition(), employees.get(key).getEmpGender(), employees.get(key).getEmpDepartment());
+            str += "\n"+ employees.get(key).getFirstName() + "\t";
+            str += employees.get(key).getLastName()+ "\t";
+            str += employees.get(key).getEmpPosition()+ "\t";
+            str += employees.get(key).getEmpDepartment()+ "\t";
+            str += employees.get(key).yearsInCompany()+ "\t\t";
+            str += employees.get(key).getDateStarted()+ "\t";
+            info.add(str);
         }
-    }
+    
+        return info;
+    } 
+     
+     
+
+
+ 
 
 
 

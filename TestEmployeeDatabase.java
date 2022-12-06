@@ -1,6 +1,7 @@
 // import java.time.LocalDate;
 
-public class TestEmployeeDatabase {
+public class TestEmployeeDatabase 
+{
 
 	public static void main(String[] args) {
 		// EmployeeRegistration form = new EmployeeRegistration();
@@ -18,7 +19,9 @@ public class TestEmployeeDatabase {
 		//dbs.getDepartmentListAndNumberOfEmployees();
 		//System.out.println(dbs.getNumberOfEmployeesInDepartment("Human Resources"));
 		//System.out.println(dbs.getDepartments());
-		dbs.getEmployeeDetails();
+		//System.out.println(dbs.getEmployees());
+		// System.out.println(EmployeeDatabase.getNumberOfEmployees());
+		DisplayEmployee displayEmployee = new DisplayEmployee();
 	}
 
 }
