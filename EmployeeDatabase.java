@@ -348,6 +348,19 @@ public class EmployeeDatabase {
         System.out.println("Over 50: " + countOver50);
     }
 
+    // get the firstname, lastname, position, gender and department of all employees
+    public void getEmployeeDetails() {
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        System.out.printf("First Name\tLast Name\tPosition\tGender\tDepartment\n");
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            System.out.printf("%s\t\t%s\t\t%s\t\t%s\t%s\n", employees.get(key).getFirstName(), employees.get(key).getLastName(), employees.get(key).getEmpPosition(), employees.get(key).getEmpGender(), employees.get(key).getEmpDepartment());
+        }
+    }
+
 
 
 }
