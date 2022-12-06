@@ -182,7 +182,7 @@ public class EmployeeDatabase {
         iterator = hashMapKeys.iterator();
         while (iterator.hasNext()) {
             String key = (String) iterator.next();
-            if (employees.get(key).getEmpGender().equals(Employee.Gender.FEMALE) ) {
+            if (employees.get(key).getEmpGender().equals(Employee.Gender.FEMALE)) {
                 count++;
             }
         }

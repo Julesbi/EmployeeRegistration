@@ -43,9 +43,11 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
         private JLabel maritalLabel;
         private JRadioButton single;
         private JRadioButton married;
-        private ButtonGroup gendeGroup;
+        private ButtonGroup genderGroup;
+        private ButtonGroup maritalGroup;
         private JButton submit;
         private JButton reset;
+        private JButton buttonNew;
 
         String dates[] = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15",
                         "16",
@@ -61,14 +63,46 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
         Employee.EducationLevel eduLevels[] = Employee.EducationLevel.values();
         String selectedDepartment, selectedPosition;
 
+        // create the reset function
+        public void resetForm() {
+                fNameText.setText("");
+                lNameText.setText("");
+                contactText.setText("");
+                addressText.setText("");
+                salaryText.setText("");
+                employeeIdText.setText("");
+                genderGroup.clearSelection();
+                maritalGroup.clearSelection();
+                positionText.setSelectedIndex(0);
+                eduLevelText.setSelectedIndex(0);
+                profLevelText.setSelectedIndex(0);
+                yearOB.setSelectedIndex(0);
+                monthOB.setSelectedIndex(0);
+                dateOB.setSelectedIndex(0);
+                yearSD.setSelectedIndex(0);
+                monthSD.setSelectedIndex(0);
+                dateSD.setSelectedIndex(0);
+                departmentText.setSelectedIndex(0);
+                departmentText.setSelectedIndex(-1);
+                positionText.setSelectedIndex(-1);
+                eduLevelText.setSelectedIndex(-1);
+                profLevelText.setSelectedIndex(-1);
+                dateOB.setSelectedIndex(-1);
+                monthOB.setSelectedIndex(-1);
+                yearOB.setSelectedIndex(-1);
+                dateSD.setSelectedIndex(-1);
+                monthSD.setSelectedIndex(-1);
+                yearSD.setSelectedIndex(-1);
+        }
+
         public EmployeeRegistration() {
                 JPanel panel = new JPanel();
                 panel.setLayout(null);
                 panel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
                 panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
                                 "REGISTER EMPLOYEE", 0, 0, new Font("Times New Roman", Font.PLAIN, 20), Color.BLUE));
-
                 panel.setBackground(Color.WHITE);
+
                 fNameLabel = new JLabel("First Name");
                 fNameLabel.setFont(new Font("Times New Roman", Font.PLAIN, 17));
                 fNameLabel.setSize(100, 20);
@@ -151,6 +185,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                 departmentText = new JComboBox<String>(departments);
                 departmentText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                departmentText.setSelectedIndex(-1);
                 departmentText.setSize(170, 20);
                 departmentText.setLocation(140, 220);
                 panel.add(departmentText);
@@ -164,6 +199,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                 profLevelText = new JComboBox<Employee.Level>(profLevels);
                 profLevelText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                profLevelText.setSelectedIndex(-1);
                 profLevelText.setSize(170, 20);
                 profLevelText.setLocation(510, 220);
                 panel.add(profLevelText);
@@ -177,18 +213,21 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                 dateOB = new JComboBox<String>(dates);
                 dateOB.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                dateOB.setSelectedIndex(-1);
                 dateOB.setSize(45, 20);
                 dateOB.setLocation(140, 260);
                 panel.add(dateOB);
 
                 monthOB = new JComboBox<String>(months);
                 monthOB.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                monthOB.setSelectedIndex(-1);
                 monthOB.setSize(45, 20);
                 monthOB.setLocation(195, 260);
                 panel.add(monthOB);
 
                 yearOB = new JComboBox<String>(years);
                 yearOB.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                yearOB.setSelectedIndex(-1);
                 yearOB.setSize(60, 20);
                 yearOB.setLocation(250, 260);
                 panel.add(yearOB);
@@ -202,18 +241,21 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                 dateSD = new JComboBox<String>(dates);
                 dateSD.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                dateSD.setSelectedIndex(-1);
                 dateSD.setSize(45, 20);
                 dateSD.setLocation(510, 260);
                 panel.add(dateSD);
 
                 monthSD = new JComboBox<String>(months);
                 monthSD.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                monthSD.setSelectedIndex(-1);
                 monthSD.setSize(45, 20);
                 monthSD.setLocation(565, 260);
                 panel.add(monthSD);
 
                 yearSD = new JComboBox<String>(years);
                 yearSD.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                yearSD.setSelectedIndex(-1);
                 yearSD.setSize(60, 20);
                 yearSD.setLocation(620, 260);
                 panel.add(yearSD);
@@ -227,7 +269,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                 male = new JRadioButton("Male");
                 male.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-                male.setSelected(true);
+                male.setSelected(false);
                 male.setSize(75, 20);
                 male.setLocation(140, 300);
                 panel.add(male);
@@ -239,9 +281,9 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
                 female.setLocation(230, 300);
                 panel.add(female);
 
-                gendeGroup = new ButtonGroup();
-                gendeGroup.add(male);
-                gendeGroup.add(female);
+                genderGroup = new ButtonGroup();
+                genderGroup.add(male);
+                genderGroup.add(female);
 
                 // MARITAL STATUS
                 maritalLabel = new JLabel("Marital Status");
@@ -252,7 +294,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                 single = new JRadioButton("Single");
                 single.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-                single.setSelected(true);
+                single.setSelected(false);
                 single.setSize(75, 20);
                 single.setLocation(510, 300);
                 panel.add(single);
@@ -264,6 +306,10 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
                 married.setLocation(600, 300);
                 panel.add(married);
 
+                maritalGroup = new ButtonGroup();
+                maritalGroup.add(single);
+                maritalGroup.add(married);
+
                 // POSITION
                 positionLabel = new JLabel("Position");
                 positionLabel.setFont(new Font("Times New Roman", Font.PLAIN, 17));
@@ -274,6 +320,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
                 // assign positionText to new JComboBox with the Employee.positions
                 // linkedHashMap as the parameter
                 positionText = new JComboBox<String>(positions);
+                positionText.setSelectedIndex(-1);
                 positionText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
                 positionText.setSize(170, 20);
                 positionText.setLocation(140, 340);
@@ -289,6 +336,7 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
                 eduLevelText = new JComboBox<Employee.EducationLevel>(eduLevels);
                 eduLevelText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
                 eduLevelText.setSize(170, 20);
+                eduLevelText.setSelectedIndex(-1);
                 eduLevelText.setLocation(510, 340);
                 panel.add(eduLevelText);
 
@@ -306,8 +354,18 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
                 reset.setSize(100, 20);
                 reset.setLocation(510, 450);
                 reset.setBackground(Color.YELLOW);
-                // reset.addActionListener(this);
+                reset.addActionListener(this);
                 panel.add(reset);
+
+                // add a button to the panel
+                buttonNew = new JButton("Show Stats");
+                buttonNew.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+                buttonNew.setSize(100, 20);
+                buttonNew.setLocation(510, 500);
+                buttonNew.setBackground(Color.BLUE);
+                buttonNew.setForeground(Color.WHITE);
+                buttonNew.addActionListener(this);
+                panel.add(buttonNew);
 
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setBounds(300, 90, 770, 600);
@@ -355,6 +413,17 @@ public class EmployeeRegistration extends JFrame implements ActionListener {
 
                         db.createEmployee(Integer.toString(db.getLargestEmployeeId() + 1), newEmployee);
                         System.out.println(db.getEmployeeNames());
+
+                        // clear the form after submission
+                        resetForm();
+
+                } else if (e.getSource() == reset) {
+                        resetForm();
+                }
+
+                else if (e.getSource() == buttonNew) {
+                        DisplayDepartmentStats stats = new DisplayDepartmentStats();
+                        stats.setVisible(true);
                 }
         }
 }
