@@ -1,11 +1,11 @@
 import java.time.LocalDate;
-// import java.time.LocalDate;
 
 public class TestEmployeeDatabase {
 
 	public static void main(String[] args) {
-		EmployeeRegistration form = new EmployeeRegistration();
 
+		
+		WelcomePage page = new WelcomePage();
 		EmployeeDatabase dbs = new EmployeeDatabase();
 
 		// ADMINISTRATIVE
@@ -186,9 +186,6 @@ public class TestEmployeeDatabase {
 						270000.00,
 						Employee.MaritalStatus.DIVORCED, Employee.departments.get("5"), Employee.positions.get("15")));
 
-		// print the departments
-		// System.out.println("Departments: " +
-		// EmployeeDatabase.getDepartmentListAndNumberOfEmployees());
 	}
 
 }
