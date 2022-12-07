@@ -7,6 +7,9 @@ public class WelcomePage extends JFrame implements ActionListener  {
     private JButton registerButton;
     private JLabel stats;
     private JButton viewStats;
+
+    DisplayEmployee dispPage;
+
     public WelcomePage(){
     JPanel page = new JPanel();
     page.setLayout(null);
@@ -14,7 +17,6 @@ public class WelcomePage extends JFrame implements ActionListener  {
     page.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
                         "Welcome Page", 0, 0, new Font("Times New Roman", Font.PLAIN, 20), Color.BLUE));
     page.setBackground(Color.WHITE);
-
 
     
     
@@ -55,19 +57,23 @@ public class WelcomePage extends JFrame implements ActionListener  {
     page.add(viewStats);
     
     
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false);
     setSize(500, 500);
     add(page);
     setVisible(true);
+
     }
     @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == registerButton) {
-                EmployeeRegistration registerEmployee = new EmployeeRegistration();
-                setVisible(false);
-                registerEmployee.setVisible(true);
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == registerButton){
+            EmployeeRegistration registerEmployee = new EmployeeRegistration();
+            setVisible(false);
+            registerEmployee.setVisible(true);
         }
+        else if(e.getSource() == viewStats){
+            dispose();
+            new DisplayEmployee().setVisible(true);
         }
-    
-    
-}
+    }
+    }
