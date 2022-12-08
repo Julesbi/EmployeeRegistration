@@ -23,6 +23,7 @@ public class Employee {
 
 	// CONSTRUCTORS
 	public Employee() {
+
 		this.setEmployeeID("00");
 		this.setEmployeeType(EmployeeType.INTERN);
 		this.setFirstName("Mark");
@@ -292,7 +293,7 @@ public class Employee {
 		positions.put("13", "Sales Officer");
 		positions.put("14", "Marketing Officer");
 		positions.put("15", "Technology Officer");
-		
+
 		positions.put("16", "Administration Officer");
 	}
 }
