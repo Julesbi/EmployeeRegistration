@@ -1,15 +1,12 @@
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Formatter;
-// import java.util.ArrayList;
-// import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-// import java.util.Set;
 
 public class Employee {
 	private final int pensionAge = 65;
 	private String employeeID;
+	private EmployeeType employeeType;
 	private String firstName;
 	private String lastName;
 	private Gender empGender;
@@ -27,6 +24,7 @@ public class Employee {
 	// CONSTRUCTORS
 	public Employee() {
 		this.setEmployeeID("00");
+		this.setEmployeeType(EmployeeType.INTERN);
 		this.setFirstName("Mark");
 		this.setLastName("Cuban");
 		this.setEmpGender(Gender.MALE);
@@ -42,10 +40,11 @@ public class Employee {
 		this.setEmpPosition(positions.get("3"));
 	}
 
-	public Employee(String employeeID, String firstName, String lastName, Gender empGender, String contactNumber,
+	public Employee(String employeeID, EmployeeType employeeType, String firstName, String lastName, Gender empGender,
+			String contactNumber,
 			String address, Level empLevel, LocalDate dateStarted, LocalDate dob, EducationLevel empEducationLevel,
 			double salary, MaritalStatus empMaritalStatus, String empDepartment, String empPosition) {
-		this.employeeID = employeeID;
+		this.employeeType = employeeType;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.empGender = empGender;
@@ -62,16 +61,24 @@ public class Employee {
 	}
 
 	// GETTERS AND SETTERS
-	public int getPensionAge() {
-		return this.pensionAge;
-	}
-
 	public String getEmployeeID() {
-		return this.employeeID;
+		return employeeID;
 	}
 
 	public void setEmployeeID(String employeeID) {
 		this.employeeID = employeeID;
+	}
+
+	public int getPensionAge() {
+		return this.pensionAge;
+	}
+
+	public EmployeeType getEmployeeType() {
+		return this.employeeType;
+	}
+
+	public void setEmployeeType(EmployeeType employeeType) {
+		this.employeeType = employeeType;
 	}
 
 	public String getFirstName() {
@@ -185,7 +192,7 @@ public class Employee {
 	 * @return the number years worked in the company
 	 */
 	public int yearsInCompany() {
-		Period years = Period.between(this.dateStarted,LocalDate.now());
+		Period years = Period.between(this.dateStarted, LocalDate.now());
 		return years.getYears();
 	}
 
@@ -193,7 +200,7 @@ public class Employee {
 	 * @return the age of the employee
 	 */
 	public int calculateAge() {
-		Period years = Period.between(LocalDate.now(), this.dob);
+		Period years = Period.between(this.dob, LocalDate.now());
 		return years.getYears();
 	}
 
@@ -208,7 +215,7 @@ public class Employee {
 	// create a toString method to display the employee details using formatter
 	public String toString() {
 		return String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s",
-				this.employeeID, this.firstName, this.lastName, this.empGender, this.contactNumber, this.address,
+				this.employeeType, this.firstName, this.lastName, this.empGender, this.contactNumber, this.address,
 				this.empLevel, this.dateStarted, this.dob, this.empEducationLevel, this.salary, this.empMaritalStatus,
 				this.empDepartment, this.empPosition);
 	}
@@ -223,7 +230,8 @@ public class Employee {
 	static enum Level {
 		CSUITE,
 		DIRECTOR,
-		MANAGER
+		MANAGER,
+		OFFICER
 	}
 
 	// create education level of enum type
@@ -241,6 +249,13 @@ public class Employee {
 		DIVORCED
 	}
 
+	// create enum for employee type
+	static enum EmployeeType {
+		PERMANENT,
+		CONTRACT,
+		INTERN
+	}
+
 	// create hashmap for departments
 	public static Map<String, String> departments = new LinkedHashMap<String, String>();
 	static {
@@ -249,19 +264,34 @@ public class Employee {
 		departments.put("3", "Sales");
 		departments.put("4", "Marketing");
 		departments.put("5", "Technology");
-		departments.put("6", "Operations");
+		departments.put("6", "Administration");
 	}
 
 	// create hashmap for positions
 	public static Map<String, String> positions = new LinkedHashMap<String, String>();
 
 	static {
-		positions.put("1", "Manager of Human Resources");
-		positions.put("2", "Supervisor of Sales");
-		positions.put("3", "Clerk");
-		positions.put("4", "Sales Representative");
-		positions.put("5", "Marketing Representative");
-		positions.put("6", "IT Specialist");
-		positions.put("7", "Operations Manager");
+
+		positions.put("0", "Human Resources Officer");
+
+		positions.put("1", "Director of Human Resources");
+		positions.put("2", "Director of Finance");
+		positions.put("3", "Director of Sales");
+		positions.put("4", "Director of Marketing");
+		positions.put("5", "Director of Technology");
+
+		positions.put("6", "Manager of Human Resources");
+		positions.put("7", "Manager of Finance");
+		positions.put("8", "Manager of Sales");
+		positions.put("9", "Manager of Marketing");
+		positions.put("10", "Manager of Technology");
+
+		positions.put("11", "Human Resources Officer");
+		positions.put("12", "Financial Officer");
+		positions.put("13", "Sales Officer");
+		positions.put("14", "Marketing Officer");
+		positions.put("15", "Technology Officer");
+		
+		positions.put("16", "Administration Officer");
 	}
 }

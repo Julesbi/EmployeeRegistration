@@ -5,8 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import java.util.Formatter;
-
 public class EmployeeDatabase {
 
     private static Map<String, Employee> employees;
@@ -23,6 +21,7 @@ public class EmployeeDatabase {
         employees.put(i, employee);
         System.out.println("Employee no. " +
                 employee.getEmployeeID() + ", " +
+                employee.getEmployeeType() + ", " +
                 employee.getFirstName() + ", " +
                 employee.getLastName() + ", " +
                 employee.getEmpDepartment() + ", " +
@@ -75,7 +74,7 @@ public class EmployeeDatabase {
     }
 
     // return the list of departments in the company
-    public ArrayList<String> getDepartments() {
+    public static ArrayList<String> getDepartments() {
         ArrayList<String> departments = new ArrayList<>();
 
         Iterator<String> iterator = null;
@@ -84,16 +83,19 @@ public class EmployeeDatabase {
         iterator = hashMapKeys.iterator();
         while (iterator.hasNext()) {
             String key = (String) iterator.next();
-            departments.add(employees.get(key).getEmpDepartment());
+
+            // check if the department is already in the list
+            if (!departments.contains(employees.get(key).getEmpDepartment()))
+                departments.add(employees.get(key).getEmpDepartment());
         }
 
         return departments;
     }
 
     // return number of employees in a department
+
     public static int getNumberOfEmployeesInDepartment(String department) {
         int count = 0;
-        System.out.println("Department: " + department);
 
         Iterator<String> iterator = null;
         Set<String> hashMapKeys = employees.keySet();
@@ -109,13 +111,23 @@ public class EmployeeDatabase {
         return count;
     }
 
-    // get the list of departments and the number of employees in each department on separate lines
-    public void getDepartmentListAndNumberOfEmployees() {
+    // get the list of departments and the number of employees in each department on
+    // separate lines
+    public static String getDepartmentListAndNumberOfEmployees() {
         ArrayList<String> departments = getDepartments();
-        System.out.printf("%-20s %s\n", "Department", "Number of Employees");
+
+        String departInfo = "";
+
+        String title = "\n\nDepartment\t\tNumber of Employees";
+        departInfo += title;
+
         for (String department : departments) {
-            System.out.printf("%-20s %d\n", department, getNumberOfEmployeesInDepartment(department));
+            String departStat = "";
+            departStat += "\n" + department + "\t\t";
+            departStat += getNumberOfEmployeesInDepartment(department);
+            departInfo += departStat;
         }
+        return departInfo;
     }
 
     // return total number of employees
@@ -155,7 +167,7 @@ public class EmployeeDatabase {
     }
 
     // return total counts of males
-    public int getNumberOfMales() {
+    public static int getNumberOfMales() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -173,7 +185,7 @@ public class EmployeeDatabase {
     }
 
     // return total counts of females
-    public int getNumberOfFemales() {
+    public static int getNumberOfFemales() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -190,7 +202,7 @@ public class EmployeeDatabase {
     }
 
     // return total single employees
-    public int getNumberOfSingleEmployees() {
+    public static int getNumberOfSingleEmployees() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -208,7 +220,7 @@ public class EmployeeDatabase {
     }
 
     // return total married employees
-    public int getNumberOfMarriedEmployees() {
+    public static int getNumberOfMarriedEmployees() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -225,8 +237,26 @@ public class EmployeeDatabase {
         return count;
     }
 
+    // return of divorced employees
+    public static int getNumberOfDivorcedEmployees() {
+        int count = 0;
+
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            if (employees.get(key).getEmpMaritalStatus().equals(Employee.MaritalStatus.DIVORCED)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     // return total phd employees
-    public int getNumberOfPhdEmployees() {
+    public static int getNumberOfPhdEmployees() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -244,7 +274,7 @@ public class EmployeeDatabase {
     }
 
     // return total masters employees
-    public int getNumberOfMastersEmployees() {
+    public static int getNumberOfMastersEmployees() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -262,7 +292,7 @@ public class EmployeeDatabase {
     }
 
     // return total bachelors employees
-    public int getNumberOfBachelorsEmployees() {
+    public static int getNumberOfBachelorsEmployees() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -280,7 +310,7 @@ public class EmployeeDatabase {
     }
 
     // return total high school employees
-    public int getNumberOfHighSchoolEmployees() {
+    public static int getNumberOfHighSchoolEmployees() {
         int count = 0;
 
         Iterator<String> iterator = null;
@@ -298,7 +328,7 @@ public class EmployeeDatabase {
     }
 
     // return average tenure of employees
-    public double getAverageTenure() {
+    public static double getAverageTenure() {
         double totalTenure = 0;
         Iterator<String> iterator = null;
         Set<String> hashMapKeys = employees.keySet();
@@ -310,6 +340,45 @@ public class EmployeeDatabase {
         }
 
         return totalTenure / employees.size();
+    }
+
+    // compute the age distribution and return them in a linkedHashMap
+    public static LinkedHashMap<String, Integer> getAgeDistributionMap() {
+        int countUnder20 = 0;
+        int count20to30 = 0;
+        int count30to40 = 0;
+        int count40to50 = 0;
+        int countOver50 = 0;
+
+        LinkedHashMap<String, Integer> ageDistributionMap = new LinkedHashMap<>();
+
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            int age = employees.get(key).calculateAge();
+            if (age < 20) {
+                countUnder20++;
+            } else if (age >= 20 && age < 30) {
+                count20to30++;
+            } else if (age >= 30 && age < 40) {
+                count30to40++;
+            } else if (age >= 40 && age < 50) {
+                count40to50++;
+            } else {
+                countOver50++;
+            }
+        }
+
+        ageDistributionMap.put("Under 20", countUnder20);
+        ageDistributionMap.put("20 to 30", count20to30);
+        ageDistributionMap.put("30 to 40", count30to40);
+        ageDistributionMap.put("40 to 50", count40to50);
+        ageDistributionMap.put("Over 50", countOver50);
+
+        return ageDistributionMap;
     }
 
     // return the age distribution of employees
@@ -347,11 +416,47 @@ public class EmployeeDatabase {
         System.out.println("Over 50: " + countOver50);
     }
 
+    // create salary distribution map
+    public static LinkedHashMap<String, Integer> getSalaryDistributionMap() {
+        int countUnder1k = 0;
+        int count1kto3k = 0;
+        int count3kto4k = 0;
+        int count4kto5k = 0;
+        int countOver5k = 0;
 
+        LinkedHashMap<String, Integer> salaryDistributionMap = new LinkedHashMap<>();
+
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            double salary = employees.get(key).getSalary();
+            if (salary < 1000) {
+                countUnder1k++;
+            } else if (salary >= 1000 && salary < 3000) {
+                count1kto3k++;
+            } else if (salary >= 3000 && salary < 4000) {
+                count3kto4k++;
+            } else if (salary >= 4000 && salary < 5000) {
+                count4kto5k++;
+            } else {
+                countOver5k++;
+            }
+        }
+
+        salaryDistributionMap.put("UNDER 1K", countUnder1k);
+        salaryDistributionMap.put("1K TO 3K", count1kto3k);
+        salaryDistributionMap.put("3K TO 4K", count3kto4k);
+        salaryDistributionMap.put("4K TO 5K", count4kto5k);
+        salaryDistributionMap.put("Over 5K", countOver5k);
+
+        return salaryDistributionMap;
+    }
 
     // write a function that returns an arraylist of all employees as objects
-    public static ArrayList<String> getEmployees() 
-    {
+    public static ArrayList<String> getEmployees() {
         ArrayList<String> info = new ArrayList<String>();
         String title = "First Name\tLast Name\tPosition\tDepartment\t\tYears in Company\tDate Started";
         info.add(title);
@@ -359,27 +464,18 @@ public class EmployeeDatabase {
         Set<String> hashMapKeys = employees.keySet();
 
         iterator = hashMapKeys.iterator();
-        while (iterator.hasNext()) 
-        {        
+        while (iterator.hasNext()) {
             String str = "";
             String key = (String) iterator.next();
-            str += "\n"+ employees.get(key).getFirstName() + "\t";
-            str += employees.get(key).getLastName()+ "\t";
-            str += employees.get(key).getEmpPosition()+ "\t";
-            str += employees.get(key).getEmpDepartment()+ "\t";
-            str += employees.get(key).yearsInCompany()+ "\t\t";
-            str += employees.get(key).getDateStarted()+ "\t";
+            str += "\n" + employees.get(key).getFirstName() + "\t";
+            str += employees.get(key).getLastName() + "\t";
+            str += employees.get(key).getEmpPosition() + "\t";
+            str += employees.get(key).getEmpDepartment() + "\t";
+            str += employees.get(key).yearsInCompany() + "\t\t";
+            str += employees.get(key).getDateStarted() + "\t";
             info.add(str);
         }
-    
+
         return info;
-    } 
-     
-     
-
-
- 
-
-
-
+    }
 }
