@@ -11,6 +11,7 @@ public class EmployeeDatabase {
 
     public EmployeeDatabase() {
         employees = new LinkedHashMap<>();
+        
     }
 
     public Employee getEmployee(String i) {
@@ -19,17 +20,6 @@ public class EmployeeDatabase {
 
     public void createEmployee(String i, Employee employee) {
         employees.put(i, employee);
-        System.out.println("Employee no. " +
-                employee.getEmployeeID() + ", " +
-                employee.getEmployeeType() + ", " +
-                employee.getFirstName() + ", " +
-                employee.getLastName() + ", " +
-                employee.getEmpDepartment() + ", " +
-                employee.getEmpPosition() + ", " +
-                employee.getEmpEducationLevel() + ", " +
-                employee.getEmpGender() + ", " +
-                employee.getEmpMaritalStatus() + ", " +
-                " has been created.");
     }
 
     // get the the largest employee id
@@ -408,12 +398,7 @@ public class EmployeeDatabase {
                 countOver50++;
             }
         }
-        System.out.println("Age Distribution");
-        System.out.println("Under 20: " + countUnder20);
-        System.out.println("20 to 30: " + count20to30);
-        System.out.println("30 to 40: " + count30to40);
-        System.out.println("40 to 50: " + count40to50);
-        System.out.println("Over 50: " + countOver50);
+        
     }
 
     // create salary distribution map
@@ -478,4 +463,6 @@ public class EmployeeDatabase {
 
         return info;
     }
+
+    
 }

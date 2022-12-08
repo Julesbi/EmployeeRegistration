@@ -44,6 +44,7 @@ public class Employee {
 			String contactNumber,
 			String address, Level empLevel, LocalDate dateStarted, LocalDate dob, EducationLevel empEducationLevel,
 			double salary, MaritalStatus empMaritalStatus, String empDepartment, String empPosition) {
+		this.employeeID = employeeID;
 		this.employeeType = employeeType;
 		this.firstName = firstName;
 		this.lastName = lastName;
