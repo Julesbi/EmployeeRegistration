@@ -1,9 +1,11 @@
 import java.util.ArrayList;
-// import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class EmployeeDatabase {
 
@@ -11,7 +13,7 @@ public class EmployeeDatabase {
 
     public EmployeeDatabase() {
         employees = new LinkedHashMap<>();
-        
+
     }
 
     public Employee getEmployee(String i) {
@@ -371,36 +373,6 @@ public class EmployeeDatabase {
         return ageDistributionMap;
     }
 
-    // return the age distribution of employees
-    public void getAgeDistribution() {
-        int countUnder20 = 0;
-        int count20to30 = 0;
-        int count30to40 = 0;
-        int count40to50 = 0;
-        int countOver50 = 0;
-
-        Iterator<String> iterator = null;
-        Set<String> hashMapKeys = employees.keySet();
-
-        iterator = hashMapKeys.iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            int age = employees.get(key).calculateAge();
-            if (age < 20) {
-                countUnder20++;
-            } else if (age >= 20 && age < 30) {
-                count20to30++;
-            } else if (age >= 30 && age < 40) {
-                count30to40++;
-            } else if (age >= 40 && age < 50) {
-                count40to50++;
-            } else {
-                countOver50++;
-            }
-        }
-        
-    }
-
     // create salary distribution map
     public static LinkedHashMap<String, Integer> getSalaryDistributionMap() {
         int countUnder1k = 0;
@@ -440,12 +412,40 @@ public class EmployeeDatabase {
         return salaryDistributionMap;
     }
 
-    // write a function that returns an arraylist of all employees as objects
+    // RETURN all employees in a DefaultTableModel and JTable
+    public static JTable getEmployeesTable() {
+        String[] columnNames = { "First Name", "Last Name", "Position", "Department", "Years in Company",
+                "Date Started" };
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        JTable table = new JTable(model);
+
+        Iterator<String> iterator = null;
+        Set<String> hashMapKeys = employees.keySet();
+
+        iterator = hashMapKeys.iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            String firstName = employees.get(key).getFirstName();
+            String lastName = employees.get(key).getLastName();
+            String position = employees.get(key).getEmpPosition().toString();
+            String department = employees.get(key).getEmpDepartment().toString();
+            int yearsInCompany = employees.get(key).yearsInCompany();
+            String dateStarted = employees.get(key).getDateStarted().toString();
+
+            Object[] data = { firstName, lastName, position, department, yearsInCompany, dateStarted };
+            model.addRow(data);
+        }
+
+        return table;
+    }
+
+    // Returns an arraylist of all employees as objects
     public static ArrayList<String> getEmployees() {
         ArrayList<String> info = new ArrayList<String>();
-        String title = "First Name\tLast Name\tPosition\tDepartment\t\tYears in Company\tDate Started";
+        String title = "First Name\tLast Name\tPosition\t\t\tDepartment\t\tYears in Company\tDate Started";
         info.add(title);
         Iterator<String> iterator = null;
+        System.out.println(employees);
         Set<String> hashMapKeys = employees.keySet();
 
         iterator = hashMapKeys.iterator();
@@ -454,15 +454,14 @@ public class EmployeeDatabase {
             String key = (String) iterator.next();
             str += "\n" + employees.get(key).getFirstName() + "\t";
             str += employees.get(key).getLastName() + "\t";
-            str += employees.get(key).getEmpPosition() + "\t";
-            str += employees.get(key).getEmpDepartment() + "\t";
+            str += employees.get(key).getEmpPosition() + "\t\t";
+            str += employees.get(key).getEmpDepartment() + "\t\t";
             str += employees.get(key).yearsInCompany() + "\t\t";
-            str += employees.get(key).getDateStarted() + "\t";
+            str += employees.get(key).getDateStarted() + "\t\t";
             info.add(str);
         }
 
         return info;
     }
 
-    
 }

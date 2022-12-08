@@ -3,17 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class DisplayDepartmentStats extends JFrame implements ActionListener {
+public class DisplayEmployeeStats extends JFrame implements ActionListener {
 
-    JScrollPane scrollPane;
+    JScrollPane scrollPane = new JScrollPane();
     JButton backButton;
     JTextArea textArea;
     JPanel panel;
 
-
-    public DisplayDepartmentStats() {
-
-        super("Display Department Stats");
+    public DisplayEmployeeStats() {
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -39,11 +36,10 @@ public class DisplayDepartmentStats extends JFrame implements ActionListener {
             list.setBackground(Color.WHITE);
             list.setForeground(Color.BLUE);
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            
+
             // add the list to the scroll pane
             scrollPaneList = new JScrollPane(list);
             scrollPaneList.setPreferredSize(new Dimension(300, 300));
-
 
             // make a JTable with all departments and number of employees in each department
             JLabel tableLabel = new JLabel("DEPARTMENTS AND NUMBER OF EMPLOYEES");
@@ -155,7 +151,6 @@ public class DisplayDepartmentStats extends JFrame implements ActionListener {
         backButton.setBackground(Color.YELLOW);
         backButton.addActionListener(this);
 
-
         // add the text area to the panel
         panel.add(textArea);
         panel.add(scrollPaneList);
@@ -171,8 +166,7 @@ public class DisplayDepartmentStats extends JFrame implements ActionListener {
         // add the panel to the frame
         add(panel);
         setMinimumSize(new Dimension(770, 720));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     @Override
